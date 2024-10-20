@@ -1,16 +1,35 @@
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 import { FaGoogle, FaBookmark, FaSearch, FaLock } from 'react-icons/fa';
 
 function Home() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const login = useGoogleLogin({
-    onSuccess: credentialResponse => {
+    onSuccess: async (credentialResponse) => {
       console.log('Google login successful:', credentialResponse);
-      navigate('/links')
-      // Here you would typically send the credential to your server or
-      // handle the login state in your application
+      const token = credentialResponse.access_token;
+
+      if (!token) {
+        console.error('No access token found');
+        return;
+      }
+
+      try {
+        const response = await axios.post("http://localhost:3000/auth/google", {
+          token: token,
+        });
+
+        console.log('Response from server:', response.data);
+        // Check if login was successful
+        if (response.status === 200) {
+          navigate('/links');
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+      }
     },
     onError: () => {
       console.log('Google login failed');

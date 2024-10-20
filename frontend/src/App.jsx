@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-    <GoogleOAuthProvider clientId="463682886423-10at469n77c7rf95tj2p1k97frt85h5u.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={"463682886423-10at469n77c7rf95tj2p1k97frt85h5u.apps.googleusercontent.com"} >
       <Router>
         <Routes>
           <Route path='/' element={<Home/>} />
