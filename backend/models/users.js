@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
       required: true,
     },
     links: [{
-      name:{
+      description:{
         type:String,
       },
       url: {

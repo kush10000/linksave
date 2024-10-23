@@ -7,6 +7,8 @@ import { FaGoogle, FaBookmark, FaSearch, FaLock } from 'react-icons/fa';
 function Home() {
   const navigate = useNavigate();
 
+  //const authToken = localStorage.getItem('authToken')
+
   const login = useGoogleLogin({
     onSuccess: async (credentialResponse) => {
       console.log('Google login successful:', credentialResponse);
@@ -16,7 +18,6 @@ function Home() {
         console.error('No access token found');
         return;
       }
-
       try {
         const response = await axios.post("http://localhost:3000/auth/google", {
           token: token,
@@ -25,6 +26,7 @@ function Home() {
         console.log('Response from server:', response.data);
         // Check if login was successful
         if (response.status === 200) {
+          localStorage.setItem('authToken',token);
           navigate('/links');
         }
       } catch (error) {
