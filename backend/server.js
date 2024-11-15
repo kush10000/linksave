@@ -10,9 +10,11 @@ const app = express();
 
 // Define CORS options
 const corsOptions = {
-  origin: 'http://localhost:5173', // Your frontend URL
-  methods: ['GET', 'POST'], // Allowed methods
+  origin: ['http://localhost:5173', 'https://linksave.netlify.app', 'http://linksave.netlify.app'], // Add both local and deployed client URLs
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
   credentials: true, // Allow credentials
+  allowedHeaders: ['Content-Type', 'Authorization'], // Add any custom headers if necessary
+  exposedHeaders: ['Authorization'] // Expose any headers if needed on the client side
 };
 
 // Use CORS with options
