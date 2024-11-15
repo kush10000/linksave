@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 import { FaGoogle, FaBookmark, FaSearch, FaLock } from 'react-icons/fa';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function Home() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Home() {
         return;
       }
       try {
-        const response = await axios.post(`${process.env.BACKEND_URL}/auth/google`, {
+        const response = await axios.post(`${BACKEND_URL}/auth/google`, {
           token: token,
         });
 
