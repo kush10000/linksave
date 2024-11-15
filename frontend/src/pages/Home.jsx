@@ -19,7 +19,7 @@ function Home() {
         return;
       }
       try {
-        const response = await axios.post("http://localhost:3000/auth/google", {
+        const response = await axios.post(`${process.env.BACKEND_URL}/auth/google`, {
           token: token,
         });
 
